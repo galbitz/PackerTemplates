@@ -68,6 +68,8 @@ Set-Content -Path "$($packerWindowsDir)\unattended.xml" -Value $unattendedXML
 # https://technet.microsoft.com/en-us/library/cc766314(v=ws.10).aspx
 $setupComplete = @"
 netsh advfirewall firewall set rule name="WinRM-HTTP" new action=allow
+Enable-RemoteDesktop
+netsh advfirewall firewall add rule name="Remote Desktop" dir=in localport=3389 protocol=TCP action=allow
 "@
 
 New-Item -Path 'C:\Windows\Setup\Scripts' -ItemType Directory -Force
